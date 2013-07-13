@@ -23,7 +23,7 @@ HTML
       
       <script type="text/javascript">
       
-      var data = #{data_source.to_json}; 
+      var pie_input_data = #{data_source.to_json}; 
        nv.addGraph(function() {
            var chart = nv.models.pieChart()
                .x(function(d) { return d.label })
@@ -35,7 +35,7 @@ HTML
                .height(#{height});
 
              d3.select("##{elem_id} svg")
-                 .datum([data])
+                 .datum([pie_input_data])
                .transition().duration(1200)
                  .attr('width', #{width})
                  .attr('height', #{height})
@@ -73,7 +73,7 @@ HTML
       
       <script type="text/javascript">
       
-      var data = #{data_source.to_json}; 
+      var bar_input_data = #{data_source.to_json}; 
       
       nv.addGraph(function() {  
         var chart = nv.models.discreteBarChart()
@@ -87,7 +87,7 @@ HTML
             .height(#{height});
 
         d3.select("##{elem_id} svg")
-            .datum(data)
+            .datum(bar_input_data)
             .transition().duration(500)
             .attr('width', #{width})
             .attr('height', #{height})
