@@ -3,6 +3,9 @@ require "erb"
 
 module Chartx
   module Helper
+    
+    #pie_chart has different input data format LoL
+    #Todo: fix the input data format
     def pie_chart(data_source, options = {})
       options = options.dup
       @chartx_id ||= 0
@@ -32,7 +35,7 @@ HTML
                .height(#{height});
 
              d3.select("##{elem_id} svg")
-                 .datum(data)
+                 .datum([data])
                .transition().duration(1200)
                  .attr('width', #{width})
                  .attr('height', #{height})
