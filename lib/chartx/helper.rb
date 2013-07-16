@@ -109,6 +109,104 @@ JS
   
     end
     
+    def multi_bar_chart(data_source, options = {})
+      options = options.dup
+      @chartx_id ||= 0
+      height = options.delete(:height) || "600"
+      width = options.delete(:width) || "500"
+      elem_id = options.delete(:id) || "chart-#{@chartx_id += 1}"
+      
+      html = <<HTML
+      <div id="#{ERB::Util.html_escape(elem_id)}" style="height: #{ERB::Util.html_escape(height)}px;">
+      <svg></svg>
+      </div>
+HTML
+ 
+      js = <<JS
+      
+      <script type="text/javascript">
+      
+      nv.addGraph(function() {
+          var chart = nv.models.multiBarChart();
+
+          chart.xAxis
+              .tickFormat(d3.format(',f'));
+
+          chart.yAxis
+              .tickFormat(d3.format(',.1f'));
+
+          d3.select("##{elem_id} svg")
+              .datum(#{data_source.to_json})
+            .transition().duration(500).call(chart);
+
+          nv.utils.windowResize(chart.update);
+
+          return chart;
+      });
+      
+      </script>
+JS
+      if options[:content_for]
+        content_for(options[:content_for]) { js.respond_to?(:html_safe) ? js.html_safe : js }
+      else
+        html += js
+      end
+
+      html.respond_to?(:html_safe) ? html.html_safe : html
+            
+    end
+    
+    def multi_bar_horizontal_chart(data_source, options = {})
+      options = options.dup
+      @chartx_id ||= 0
+      height = options.delete(:height) || "600"
+      width = options.delete(:width) || "500"
+      elem_id = options.delete(:id) || "chart-#{@chartx_id += 1}"
+      
+      html = <<HTML
+      <div id="#{ERB::Util.html_escape(elem_id)}" style="height: #{ERB::Util.html_escape(height)}px;">
+      <svg></svg>
+      </div>
+HTML
+ 
+      js = <<JS
+      
+      <script type="text/javascript">
+      
+      nv.addGraph(function() {
+        var chart = nv.models.multiBarHorizontalChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .margin({top: 30, right: 20, bottom: 50, left: 175})
+            .showValues(true)
+            .tooltips(false)
+            .showControls(false);
+
+        chart.yAxis
+            .tickFormat(d3.format(',.2f'));
+
+        d3.select("##{elem_id} svg")
+            .datum(#{data_source.to_json})
+            .transition().duration(500)
+            .call(chart);
+
+        nv.utils.windowResize(chart.update);
+
+        return chart;
+      });
+      
+      </script>
+JS
+      if options[:content_for]
+        content_for(options[:content_for]) { js.respond_to?(:html_safe) ? js.html_safe : js }
+      else
+        html += js
+      end
+
+      html.respond_to?(:html_safe) ? html.html_safe : html
+            
+    end
+    
     def line_chart(data_source, options = {}) 
     
       options = options.dup
@@ -374,51 +472,6 @@ JS
             
     end
     
-    def multi_bar_chart(data_source, options = {})
-      options = options.dup
-      @chartx_id ||= 0
-      height = options.delete(:height) || "600"
-      width = options.delete(:width) || "500"
-      elem_id = options.delete(:id) || "chart-#{@chartx_id += 1}"
-      
-      html = <<HTML
-      <div id="#{ERB::Util.html_escape(elem_id)}" style="height: #{ERB::Util.html_escape(height)}px;">
-      <svg></svg>
-      </div>
-HTML
- 
-      js = <<JS
-      
-      <script type="text/javascript">
-      
-      nv.addGraph(function() {
-          var chart = nv.models.multiBarChart();
-
-          chart.xAxis
-              .tickFormat(d3.format(',f'));
-
-          chart.yAxis
-              .tickFormat(d3.format(',.1f'));
-
-          d3.select("##{elem_id} svg")
-              .datum(#{data_source.to_json})
-            .transition().duration(500).call(chart);
-
-          nv.utils.windowResize(chart.update);
-
-          return chart;
-      });
-      
-      </script>
-JS
-      if options[:content_for]
-        content_for(options[:content_for]) { js.respond_to?(:html_safe) ? js.html_safe : js }
-      else
-        html += js
-      end
-
-      html.respond_to?(:html_safe) ? html.html_safe : html
-            
-    end
+    
   end
 end
