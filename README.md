@@ -15,17 +15,78 @@ And then execute:
 
 ## Usage
 
-Pie chart
+Pie Chart
 
 ```erb
-
-@pie_data = [{:label=>"Group1", :value=>14}, 
-			 {:label=>"Group2", :value=>10}, 
-			 {:label=>"Group3", :value=>11}, 
-			 {:label=>"Group4", :value=>0}, 
-			 {:label=>"Group5", :value=>4}]
-
 <%= pie_chart @pie_data %>
+```
+
+Line Chart
+
+```erb
+<%= line_chart @pie_data %>
+```
+
+Discrete Bar Chart
+
+```erb
+<%= discrete_bar_chart @pie_data %>
+```
+
+Line Chart with Focus (View Finder)
+
+```erb
+<%= line_with_focus_chart @pie_data %>
+```
+
+Scatter Chart
+
+```erb
+<%= scatter_chart @pie_data %>
+```
+
+Bullet Chart
+
+```erb
+<%= bullet_chart @pie_data %>
+```
+
+Multi Bar Chart
+
+```erb
+<%= multi_bar_chart @pie_data %>
+```
+
+Multi Horizontal Bar Chart
+
+```erb
+<%= multi_bar_horizontal_chart @pie_data %>
+```
+
+## Input Data
+
+For pie Chart
+
+```js
+@pie_data = [
+	{:label=>"Group1", :value=>14}, 
+	{:label=>"Group2", :value=>10}, 
+	{:label=>"Group3", :value=>11}, 
+	{:label=>"Group4", :value=>0}, 
+	{:label=>"Group5", :value=>4}
+]
+```
+
+For pie Chart
+
+```js
+@pie_data = [
+	{:label=>"Group1", :value=>14}, 
+	{:label=>"Group2", :value=>10}, 
+	{:label=>"Group3", :value=>11}, 
+	{:label=>"Group4", :value=>0}, 
+	{:label=>"Group5", :value=>4}
+]
 ```
 
 
