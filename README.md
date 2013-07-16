@@ -1,6 +1,6 @@
 # Chartx
 
-TODO: Write a gem description
+Create beautiful d3/nvd3 javascript charts using Ruby.
 
 ## Installation
 
@@ -10,15 +10,24 @@ Add this line to your application's Gemfile:
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
-Or install it yourself as:
-
-    $ gem install chartx
 
 ## Usage
 
-TODO: Write usage instructions here
+Pie chart
+
+```erb
+
+@pie_data = [{:label=>"Group1", :value=>14}, 
+			 {:label=>"Group2", :value=>10}, 
+			 {:label=>"Group3", :value=>11}, 
+			 {:label=>"Group4", :value=>0}, 
+			 {:label=>"Group5", :value=>4}]
+
+<%= pie_chart @pie_data %>
+```
+
 
 ## Contributing
 
