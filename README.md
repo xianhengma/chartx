@@ -1,10 +1,10 @@
-# Chartx
+# Chartx (Interactive data visualizations with one line of Ruby code!)
 
-Create beautiful d3/nvd3 javascript charts using Ruby.
+Chartx is a Ruby gem helps you to develop fancy charts. It's a ruby wrapper of nvd3, which is an attempt to build re-usable charts and chart components for d3.js without taking away the power that d3.js gives you.    
 
 ## Installation
 
-Add this line to your application's Gemfile:
+To include Chartx into your rails project, add this line to your application's Gemfile:
 
     gem 'chartx'
 
@@ -12,83 +12,118 @@ And then execute:
 
     $ bundle install
 
+To add the necessary javascript files into your asset pipeline add
 
-## Usage
+    //= require chartx
 
-Pie Chart
+in ```app/assets/javascripts/application.js```
+
+If you only need a subset of models e.g. lineChart you can add 
+
+    //= require nvd3/lib/d3.v2
+    //= require nvd3/src/core
+    //= require nvd3/src/tooltip
+    //= require nvd3/src/utils.js
+    //= require nvd3/src/models/lineChart
+    //= require nvd3/src/models/legend.js
+    //= require nvd3/src/models/axis.js
+    //= require nvd3/src/models/scatter.js
+    //= require nvd3/src/models/line.js
+
+to your ```application.js```. All the models can be found in https://github.com/xianhengma/nvd3/tree/chartx-branch/src/models
+
+## Examples
+
+Pie Chart:
 
 ```erb
 <%= pie_chart @pie_data %>
 ```
 
-Line Chart
+Line Chart:
 
 ```erb
-<%= line_chart @pie_data %>
+<%= line_chart @line_data %>
 ```
 
-Discrete Bar Chart
+Discrete Bar Chart:
 
 ```erb
-<%= discrete_bar_chart @pie_data %>
+<%= discrete_bar_chart @discrete_bar_data %>
 ```
 
-Line Chart with Focus (View Finder)
+Line Chart with Focus (View Finder):
 
 ```erb
-<%= line_with_focus_chart @pie_data %>
+<%= line_with_focus_chart @line_with_focus_data %>
 ```
 
-Scatter Chart
+Scatter Chart:
 
 ```erb
-<%= scatter_chart @pie_data %>
+<%= scatter_chart @scatter_data %>
 ```
 
-Bullet Chart
+Bullet Chart:
 
 ```erb
-<%= bullet_chart @pie_data %>
+<%= bullet_chart @bullet_data %>
 ```
 
-Multi Bar Chart
+Multi Bar Chart:
 
 ```erb
-<%= multi_bar_chart @pie_data %>
+<%= multi_bar_chart @multi_bar_data %>
 ```
 
-Multi Horizontal Bar Chart
+Multi Horizontal Bar Chart:
 
 ```erb
-<%= multi_bar_horizontal_chart @pie_data %>
+<%= multi_bar_horizontal_chart @multi_bar_horizontal_data %>
 ```
 
-## Input Data
+## Data Format
 
-For pie Chart
+Data for Chartx (except Pie Chart) are in the following format:
 
 ```js
-@pie_data = [
-	{:label=>"Group1", :value=>14}, 
-	{:label=>"Group2", :value=>10}, 
-	{:label=>"Group3", :value=>11}, 
-	{:label=>"Group4", :value=>0}, 
-	{:label=>"Group5", :value=>4}
+[
+	{
+		:key => "<Series name>",
+		:color => "<CSS color>"
+		:values => [
+			{:label => 0, :value => 10},
+			{:label => 1, :value => 20},
+			{:label => 2, :value => 30}
+			....
+		]
+	},
+	{
+		key: "<Series name>"
+		...
+	}
 ]
 ```
 
-For pie Chart
+Data for Pie Chart is in the following format:
 
 ```js
-@pie_data = [
-	{:label=>"Group1", :value=>14}, 
-	{:label=>"Group2", :value=>10}, 
-	{:label=>"Group3", :value=>11}, 
-	{:label=>"Group4", :value=>0}, 
-	{:label=>"Group5", :value=>4}
+[
+	{
+		:label => "<name1>",
+		:value => 31
+	},
+	{
+		:label => "<name2>",
+		:value => 31
+
+	},
+	{
+		...
+	}
+		
 ]
 ```
-
 
 ## Contributing
 

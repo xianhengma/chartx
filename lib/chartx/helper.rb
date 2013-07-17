@@ -91,12 +91,19 @@ module Chartx
             .width(#{width})
             .height(#{height});"
 
-        when "multi_bar", "line"      
+        when "multi_bar"    
           chart_str = "var chart = nv.models.multiBarChart()
             .width(#{width})
             .height(#{height});
             chart.xAxis.tickFormat(d3.format('#{x_axis_format}'));
-            chart.yAxis.tickFormat(d3.format('#{y_axis_format}'));"      
+            chart.yAxis.tickFormat(d3.format('#{y_axis_format}'));"  
+             
+        when "line"
+          chart_str = "var chart = nv.models.lineChart()
+            .width(#{width})
+            .height(#{height});
+            chart.xAxis.tickFormat(d3.format('#{x_axis_format}'));
+            chart.yAxis.tickFormat(d3.format('#{y_axis_format}'));"    
       
         when "multi_bar_horizontal"      
           chart_str = "var chart = nv.models.multiBarHorizontalChart()
@@ -152,9 +159,7 @@ HTML
       <script type="text/javascript">
         nv.addGraph(function() {
         #{chart_str}
-        
 
-        
         d3.select("##{elem_id} svg")
             .datum(#{data_source.to_json})
             .transition().duration(500)
