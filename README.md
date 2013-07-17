@@ -1,6 +1,7 @@
-# Chartx (Interactive data visualizations with one line of Ruby code!)
+# Chartx 
 
-Chartx is a Ruby gem helps you to develop fancy charts. It's a ruby wrapper of nvd3, which is an attempt to build re-usable charts and chart components for d3.js without taking away the power that d3.js gives you.    
+Chartx is a Ruby gem helps you to develop fancy interactive data visualizations with one line of Ruby code!:) 
+It's a ruby wrapper of nvd3, which is an attempt to build re-usable charts and chart components for d3.js without taking away the power that d3.js gives you.    
 
 ## Installation
 
@@ -39,55 +40,65 @@ Pie Chart:
 ```erb
 <%= pie_chart @pie_data %>
 ```
+![ScreenShot](https://raw.github.com/xianhengma/chartx/master/screenshots/piechart.png)
 
 Line Chart:
 
 ```erb
 <%= line_chart @line_data %>
 ```
+![ScreenShot](https://raw.github.com/xianhengma/chartx/master/screenshots/piechart.png)
 
 Discrete Bar Chart:
-
 ```erb
 <%= discrete_bar_chart @discrete_bar_data %>
 ```
+![ScreenShot](https://raw.github.com/xianhengma/chartx/master/screenshots/barchart.png)
 
 Line Chart with Focus (View Finder):
-
 ```erb
 <%= line_with_focus_chart @line_with_focus_data %>
 ```
+![ScreenShot](https://raw.github.com/xianhengma/chartx/master/screenshots/linewithfocuschart.png)
 
 Scatter Chart:
-
 ```erb
 <%= scatter_chart @scatter_data %>
 ```
+![ScreenShot](https://raw.github.com/xianhengma/chartx/master/screenshots/scatterchart.png)
 
 Bullet Chart:
-
 ```erb
 <%= bullet_chart @bullet_data %>
 ```
+![ScreenShot](https://raw.github.com/xianhengma/chartx/master/screenshots/bulletchart.png)
+
+Stacked Area Bar Chart:
+```erb
+<%= stacked_area_chart @stacked_area_data %>
+```
+![ScreenShot](https://raw.github.com/xianhengma/chartx/master/screenshots/stackedareachart.png)
+
+![ScreenShot](https://raw.github.com/xianhengma/chartx/master/screenshots/stackedareachart3.png)
 
 Multi Bar Chart:
-
 ```erb
 <%= multi_bar_chart @multi_bar_data %>
 ```
+![ScreenShot](https://raw.github.com/xianhengma/chartx/master/screenshots/multibarchart2.png)
 
 Multi Horizontal Bar Chart:
-
 ```erb
 <%= multi_bar_horizontal_chart @multi_bar_horizontal_data %>
 ```
+![ScreenShot](https://raw.github.com/xianhengma/chartx/master/screenshots/horizontalbarchart.png)
 
 ## Data Format
 
 Data for Chartx (except Pie Chart) are in the following format:
 
 ```js
-[
+@data = [
 	{
 		:key => "<Series name>",
 		:color => "<CSS color>"
@@ -108,7 +119,7 @@ Data for Chartx (except Pie Chart) are in the following format:
 Data for Pie Chart is in the following format:
 
 ```js
-[
+@data = [
 	{
 		:label => "<name1>",
 		:value => 31
