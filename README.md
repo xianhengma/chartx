@@ -15,7 +15,8 @@ And then execute:
 
 To add the necessary javascript files into your asset pipeline add
 
-    //= require chartx
+    //= require chartx-core
+	//= require chartx-model
 
 in ```app/assets/javascripts/application.js```
 
