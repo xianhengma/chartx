@@ -47,7 +47,7 @@ Line Chart:
 ```erb
 <%= line_chart @line_data %>
 ```
-![ScreenShot](https://raw.github.com/xianhengma/chartx/master/screenshots/piechart.png)
+![ScreenShot](https://raw.github.com/xianhengma/chartx/master/screenshots/linechart.png)
 
 Discrete Bar Chart:
 ```erb
