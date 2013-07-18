@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.platform      = Gem::Platform::RUBY
   spec.authors       = ["Xianheng Ma"]
   spec.email         = ["xianheng.ma@gmail.com"]
-  spec.description   = "Generate beautiful charts in rails"
-  spec.summary       = "Generate beautiful charts in rails"
-  spec.homepage      = ""
+  spec.description   = "Generate beautiful interactive JavaScript charts on Ruby."
+  spec.summary       = "chartx is a Ruby gem helps you to develop beautiful interactive data visualizations with one line of Ruby code!:) It's a ruby wrapper of nvd3."
+  spec.homepage      = "http://xianhengma.github.io/chartx/"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
