@@ -4,8 +4,6 @@ require "erb"
 module Chartx
   module Helper
     
-    #pie_chart has different input data format LoL
-    #TODO: fix the input data format
     def pie_chart(data_source, options = {})
       chartx "pie", data_source, options
     end
@@ -69,6 +67,7 @@ module Chartx
       y2_axis_format = options.delete(:y2_axis_format) || '.2f'
       
       clip_edge = options.delete(:clip_edge) || true
+      duration = options.delete(:duration) || 500
       
       case chart_type
         when "discrete_bar"
@@ -93,13 +92,20 @@ module Chartx
 
         when "multi_bar"    
           chart_str = "var chart = nv.models.multiBarChart()
+            .x(function(d) { return d.#{x_name} })
+            .y(function(d) { return d.#{y_name} })
             .width(#{width})
-            .height(#{height});
+            .height(#{height})
+            .staggerLabels(#{stagger_labels})
+            .tooltips(#{show_tooltips})
+            .showValues(#{show_values});
             chart.xAxis.tickFormat(d3.format('#{x_axis_format}'));
-            chart.yAxis.tickFormat(d3.format('#{y_axis_format}'));"  
-             
+            chart.yAxis.tickFormat(d3.format('#{y_axis_format}'));" 
+
         when "line"
           chart_str = "var chart = nv.models.lineChart()
+            .x(function(d) { return d.#{x_name} })
+            .y(function(d) { return d.#{y_name} })
             .width(#{width})
             .height(#{height});
             chart.xAxis.tickFormat(d3.format('#{x_axis_format}'));
@@ -118,6 +124,8 @@ module Chartx
       
         when  "line_with_focus"       
           chart_str = "var chart = nv.models.lineWithFocusChart()
+            .x(function(d) { return d.#{x_name} })
+            .y(function(d) { return d.#{y_name} })
             .width(#{width})
             .height(#{height});
             chart.xAxis.tickFormat(d3.format('#{x_axis_format}'));
@@ -126,10 +134,12 @@ module Chartx
             
         when "scatter"       
           chart_str = "chart = nv.models.scatterChart()
+            .x(function(d) { return d.#{x_name} })
+            .y(function(d) { return d.#{y_name} })
             .showDistX(#{show_dist_x})
             .showDistY(#{show_dist_y})
             .useVoronoi(true)
-            .color(d3.scale.category10().range())
+            .color(d3.scale.#{color}.range())
             .width(#{width})
             .height(#{height});
             chart.xAxis.tickFormat(d3.format('#{x_axis_format}'));
@@ -149,26 +159,26 @@ module Chartx
           chart_str = "var chart = nv.models.bulletChart();"
       end
       
-      html = <<HTML
+      html = <<-HTML
       <div id="#{ERB::Util.html_escape(elem_id)}" style="height: #{ERB::Util.html_escape(height)}px;">
       <svg></svg>
       </div>
-HTML
+      HTML
 
-      js = <<JS
+      js = <<-JS
       <script type="text/javascript">
         nv.addGraph(function() {
         #{chart_str}
 
         d3.select("##{elem_id} svg")
             .datum(#{data_source.to_json})
-            .transition().duration(500)
+            .transition().duration(#{duration})
             .call(chart);
 
         return chart;
       });
       </script>
-JS
+      JS
 
       if options[:content_for]
         content_for(options[:content_for]) { js.respond_to?(:html_safe) ? js.html_safe : js }
