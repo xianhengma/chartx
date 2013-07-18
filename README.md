@@ -1,4 +1,5 @@
-# Chartx 
+# Chartx [![Gem Version](https://badge.fury.io/rb/chartx.png)](http://badge.fury.io/rb/chartx)
+
 
 Chartx is a Ruby gem helps you to develop fancy interactive data visualizations with one line of Ruby code!:) 
 It's a ruby wrapper of nvd3, which is an attempt to build re-usable charts and chart components for d3.js without taking away the power that d3.js gives you.    
